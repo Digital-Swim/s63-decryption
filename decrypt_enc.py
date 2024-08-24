@@ -54,6 +54,7 @@ class ENCEntry:
         return decrypted_keys
 
 
+
     def validate(self, encryption_key):
         """
         Validate that the generated CRC32 hash, when encrypted, matches the checksum stored in the entry.
@@ -205,14 +206,14 @@ class ENCObject:
 
 
 
-#decryption_key = b'123451'  # Example key, replace with the actual key
+decryption_key = b'123451'  # Example key, replace with the actual key
 
 # Example usage
-#enc_data = ENCObject(r'C:\Users\EverdreamSoft\Desktop\Projects\Toni\DecryptS63\python\PERMIT.TXT')
+enc_data = ENCObject(r'C:\Users\EverdreamSoft\Desktop\Projects\Toni\DecryptS63\python\PERMIT.TXT')
 
-#print(enc_data)
+print(enc_data)
 
 
-#print(enc_data.enc_array[0].validate(decryption_key))
+print(enc_data.enc_array[0].validate(decryption_key))
 #print(enc_data.enc_array[0].decrypt(decryption_key))
 #print(enc_data.enc_array[0].cell_keys[0].decrypt(decryption_key))
