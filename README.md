@@ -22,36 +22,36 @@ pip install pycryptodome
 #### Creating a User Permit
 
 ```bash
-python user_permit.py --action create --hw_id <hardware_id> --key <encryption_key> --m_id <machine_id>
+python user_permit.py --action create --hw_id <hardware_id> --m_key <manufacturer_key> --m_id <manufacturer_id>
 ```
 
 Parameters:
 - --hw_id: The hardware ID (string) to be encrypted.
-- --key: The encryption key used for Blowfish encryption.
-- --m_id: The machine ID (typically the last 4 characters) to be included in the permit code.
+- --m_key: The manufacturer key used for Blowfish encryption.
+- --m_id: The manufacturer ID (typically the last 4 characters) to be included in the permit code.
 
 #### Decrypting a User Permit
 
 ```bash
-python user_permit.py --action decrypt --key <encryption_key> --permit_code <user_permit_code>
+python user_permit.py --action decrypt --m_key <manufacturer_key> --permit_code <user_permit_code>
 ```
 
 Parameters:
 
-- --key: The encryption key used for decryption.
+- --m_key: The manufacturer key used for decryption.
 - --permit_code: The user permit code to be decrypted.
 
 
 ### Example 
 
 ```bash
-> python user_permit.py --action create --hw_id "12345" --key "10121" --m_id "3130"
+> python user_permit.py --action create --hw_id "12345" --m_key "10121" --m_id "3130"
   Output -
   Generated User Permit: 66B5CBFDF7E4139D5B6086C23130
 
-> python user_permit.py --action decrypt --key "10121" --permit_code "66B5CBFDF7E4139D5B6086C23130"
+> python user_permit.py --action decrypt --m_key "10121" --permit_code "66B5CBFDF7E4139D5B6086C23130"
  Output -
- Decrypted Hardware ID: 12345
- Permit Code: 66B5CBFDF7E4139D5B6086C23130, m_id: 3130, checksum: 5B6086C2, Encrypted HW ID: 66B5CBFDF7E4139D, Decrypted HW ID: 12345
+ Hardware ID: 12345
+ Permit Code: 66B5CBFDF7E4139D5B6086C23130, Manufacturer ID: 3130, Decrypted Hardware ID: 12345
 
 

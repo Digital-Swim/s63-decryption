@@ -74,7 +74,7 @@ class UserPermit:
         return self.decrypted_key
 
     def __str__(self):
-        return f"Permit Code: {self.permit_code}, m_id: {self.m_id}, checksum: {self.checksum}, Encrypted HW ID: {self.encrypted_hw_id}, Decrypted HW ID: {self.decrypted_key}"
+        return f"Permit Code: {self.permit_code}, Manufacturer ID: {self.m_id}, Decrypted Hardware ID: {self.decrypted_key}"
 
 # Example usage:
 #user_permit = UserPermit()

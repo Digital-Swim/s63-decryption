@@ -7,8 +7,8 @@ def main():
         "--action", choices=["create", "decrypt"], required=True, help="Action to perform: create or decrypt"
     )
     parser.add_argument("--hw_id", help="Hardware ID (used in create action)")
-    parser.add_argument("--key", required=True, help="Encryption key")
-    parser.add_argument("--m_id", help="Machine ID (used in create action)")
+    parser.add_argument("--m_key", required=True, help="Manufacturer key")
+    parser.add_argument("--m_id", help="<anufacturer ID (used in create action)")
     parser.add_argument("--permit_code", help="User Permit Code (used in decrypt action)")
 
     args = parser.parse_args()
@@ -19,15 +19,15 @@ def main():
         if not args.hw_id or not args.m_id:
             print("Error: --hw_id and --m_id are required for the create action")
             return
-        permit_code = user_permit.encrypt(args.hw_id, args.key, args.m_id)
+        permit_code = user_permit.encrypt(args.hw_id, args.m_key, args.m_id)
         print(f"Generated User Permit: {permit_code}")
 
     elif args.action == "decrypt":
         if not args.permit_code:
             print("Error: --permit_code is required for the decrypt action")
             return
-        decrypted_hw_id = user_permit.decrypt(args.key, args.permit_code)
-        print(f"Decrypted Hardware ID: {decrypted_hw_id}")
+        decrypted_hw_id = user_permit.decrypt(args.m_key, args.permit_code)
+        print(f"Hardware ID: {decrypted_hw_id}")
         print(user_permit)
 
 if __name__ == "__main__":
