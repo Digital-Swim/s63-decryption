@@ -108,7 +108,7 @@ permit_file_roots = store_permit_file_paths(folder_path)
 
 
 decryption_key = b'123451'  # Example key, replace with the actual key
-enc_data = ENCObject(r'C:\Users\EverdreamSoft\Desktop\Projects\Toni\DecryptS63\python\PERMIT.TXT')
+#enc_data = ENCObject(r'C:\Users\EverdreamSoft\Desktop\Projects\Toni\DecryptS63\python\PERMIT.TXT')
 
 
 print("Root paths containing 'permit.txt':")
