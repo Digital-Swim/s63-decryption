@@ -28,6 +28,7 @@ def main():
             return
         decrypted_hw_id = user_permit.decrypt(args.key, args.permit_code)
         print(f"Decrypted Hardware ID: {decrypted_hw_id}")
+        print(user_permit)
 
 if __name__ == "__main__":
     main()
