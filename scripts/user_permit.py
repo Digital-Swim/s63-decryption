@@ -40,7 +40,8 @@ class UserPermit:
         self.checksum = self.generate_encrypted_checksum(self.encrypted_hw_id)
 
         # Combine the encrypted_hw_id, checksum, and m_id to create the permit code
-        self.m_id = m_id.upper()
+        self.m_id = m_id.encode("utf-8").hex()
+
         self.permit_code = f"{self.encrypted_hw_id}{self.checksum}{self.m_id}"
 
         return self.permit_code
@@ -55,6 +56,8 @@ class UserPermit:
         self.checksum = permit_code[-12:-4]  # Next 8 characters are the checksum
         self.encrypted_hw_id = permit_code[:-12]  # The rest is the encrypted user ID
 
+        self.m_id = bytes.fromhex(self.m_id).decode("utf-8")
+        
         # Ensure key is in bytes
         key_bytes = key.encode()
 
@@ -84,7 +87,7 @@ class UserPermit:
 # Encrypt
 #hw_id = "12345"
 #machine_key = "10121"
-#machine_id = "3130"  # Example machine ID (last 4 characters)
+#machine_id = "10"  # Example machine ID (last 4 characters)
 #permit_code = user_permit.encrypt(hw_id, machine_key, machine_id)
 
 #print(f"Generated User Permit: {permit_code}")

@@ -45,13 +45,14 @@ Parameters:
 ### Example 
 
 ```bash
-> python user_permit.py --action create --hw_id "12345" --m_key "10121" --m_id "3130"
+> python user_permit.py --action create --hw_id "12345" --m_key "10121" --m_id "10"
   Output -
   Generated User Permit: 66B5CBFDF7E4139D5B6086C23130
 
 > python user_permit.py --action decrypt --m_key "10121" --permit_code "66B5CBFDF7E4139D5B6086C23130"
  Output -
+ Manufacturer ID: 10
  Hardware ID: 12345
- Permit Code: 66B5CBFDF7E4139D5B6086C23130, Manufacturer ID: 3130, Decrypted Hardware ID: 12345
+ Permit Code: 66B5CBFDF7E4139D5B6086C23130, Manufacturer ID: 10, Decrypted Hardware ID: 12345
 
 

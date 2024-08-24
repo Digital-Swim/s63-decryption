@@ -27,6 +27,7 @@ def main():
             print("Error: --permit_code is required for the decrypt action")
             return
         decrypted_hw_id = user_permit.decrypt(args.m_key, args.permit_code)
+        print(f"Manufacturer ID: {user_permit.m_id}")
         print(f"Hardware ID: {decrypted_hw_id}")
         print(user_permit)
 
