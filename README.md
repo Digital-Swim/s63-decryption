@@ -42,6 +42,12 @@ Parameters:
 - --permit_code: The user permit code to be decrypted.
 
 
+## Decrypting ENC Data Files
+...
+
+
+
+
 ### Example 
 
 ```bash
