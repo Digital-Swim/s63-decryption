@@ -8,6 +8,8 @@ def main():
     )
     parser.add_argument("--permit_code", required=True, help="User permit code")
     parser.add_argument("--m_key", required=True, help="Manufacturer key")
+    parser.add_argument("--source_folder", required=False, help="Source folder for decryption")
+    parser.add_argument("--dst_folder", required=False, help="Destination folder for decrypted output")
 
     args = parser.parse_args()
 
@@ -20,9 +22,13 @@ def main():
         print(f"Hardware ID: {hw_id}")
 
     elif args.action == "decrypt":
-        # This is an example, you can add more specific decrypt-related functionality here
-        s63_instance.decrypt(r"C:\Users\EverdreamSoft\Downloads\S-64_e3.0.2_ENC_Encrypted_TDS\S-64_e3.0.2_ENC_Encrypted_TDS\7 ENC Data Management\Test 7a\DS2", 
-                             r"C:\Users\EverdreamSoft\Downloads\S-64_e3.0.2_ENC_Encrypted_TDS\S-64_e3.0.2_ENC_Encrypted_TDS\7 ENC Data Management\Test 7a\DS2.decrypted")
+        if not args.source_folder or not args.dst_folder:
+            print("Error: Both --source_folder and --dst_folder are required for the decrypt action.")
+            return
+        
+        # Call the decrypt method with the provided source and destination folders
+        s63_instance.decrypt(args.source_folder, args.dst_folder)
+        print(f"Decryption completed from {args.source_folder} to {args.dst_folder}")
 
 if __name__ == "__main__":
     main()

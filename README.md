@@ -56,3 +56,15 @@ Parameters:
  Permit Code: 66B5CBFDF7E4139D5B6086C23130, Manufacturer ID: 10, Decrypted Hardware ID: 12345
 
 
+
+> python.exe .\s_63.py --action get_hw_id  --m_key "10121" --permit_code "66B5CBFDF7E4139D5B6086C23130"   
+
+ Output -
+ Hardware ID: 12345  
+
+> python.exe .\s_63.py --action decrypt  --m_key "10121" --permit_code "66B5CBFDF7E4139D5B6086C23130" --source_folder "Path_to_encrypted_data" --dst_folder  "path for decrypted output"
+
+Output -
+ Files decrypted at dst_folder
+
+
