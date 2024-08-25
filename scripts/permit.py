@@ -113,20 +113,32 @@ class CellKey:
         self.decrypted_key = None
     
 
-    def decrypt(self, decryption_key):
+    def decrypt(self, decryption_key:str):
         """
         Decrypt this cell key using Blowfish with the provided decryption key.
         """
         try:
+            print(f"Decrypting key {self.key_data} with decryption key {decryption_key}")
+           
             # Convert the key data from hex to bytes
             key_bytes = binascii.unhexlify(self.key_data)
+
+            print ("blowfish key",decryption_key)
+
             # Initialize the Blowfish cipher in ECB mode
-            cipher = Blowfish.new(decryption_key, Blowfish.MODE_ECB)
+            cipher = Blowfish.new(decryption_key.encode(), Blowfish.MODE_ECB)
+
+            print(f"Key bytes: {key_bytes}")
+
             # Decrypt the key and unpad it
             decrypted_data = unpad(cipher.decrypt(key_bytes), Blowfish.block_size)
+            
             # Store the decrypted key for later validation
             self.decrypted_key = binascii.hexlify(decrypted_data).decode()
+        
+            print(f"Decrypted key: {self.decrypted_key}")
             return self.decrypted_key
+        
         except Exception as e:
             print(f"Decryption error for key {self.key_data}: {e}")
             return None  # In case of decryption failure

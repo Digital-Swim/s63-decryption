@@ -9,6 +9,7 @@ import io
 import re
 from user_permit import UserPermit
 from .permit import Permit
+from .permit import CellKey
 
 class S63:
 
@@ -45,11 +46,12 @@ class S63:
         for cell_entry in self.permit.enc_array:
             matching_files = self.__find_cell_files(source_folder, cell_entry.cell_name)
             for file in matching_files:
-                print(f"Decrypting {file}")
-                print(f"HW_ID: {self.user_permit.hw_id}")
-                print(f"Key: {cell_entry.cell_keys[0]}")
-                cell =
-                self.__decrypt_file(file, bytes.fromhex(cell_entry.cell_keys[0].decrypt(self.user_permit.hw_id)), destination_folder)
+                print(f"Decrypting {file}...")
+                cell_key:CellKey =cell_entry.cell_keys[0]
+                cell_key.decrypt(self.user_permit.hw_id + self.user_permit.hw_id[0])
+                key = bytes.fromhex(cell_key.decrypted_key)
+                self.__decrypt_file1(file, key, destination_folder)
+
         
         return 
 
@@ -67,8 +69,7 @@ class S63:
 
         return matching_files
 
-    def __decrypt_file(self, input_file, hw_id, output_folder):
-        
+    def __decrypt_file1(self, input_file, hw_id, output_folder):
         # Read the encrypted data from the file
         with open(input_file, 'rb') as f:
             encrypted_data = f.read()
@@ -79,8 +80,7 @@ class S63:
         # Unzip the decrypted content and save the extracted files
         self.__unzip_decrypted_data(decrypted_data, output_folder)
 
-
-    def __decrypt_file_data(data_bytes, key):
+    def __decrypt_file_data(self, data_bytes, key):
 
         # Create a Blowfish cipher object in ECB mode with the provided key
         cipher = Blowfish.new(key, Blowfish.MODE_ECB)
