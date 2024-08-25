@@ -6,11 +6,10 @@ import zlib
 class UserPermit:
     def __init__(self):
         self.m_id = None
+        self.hw_id = None
         self.checksum = None
         self.encrypted_hw_id = None
         self.permit_code = None
-        self.decrypted_key = None
-
 
     def generate_encrypted_checksum(self, original_data: str) -> str:
        
@@ -71,32 +70,9 @@ class UserPermit:
         decrypted_data = unpad(decrypted_data, Blowfish.block_size)
 
         # Convert the decrypted data back to a string
-        self.decrypted_key = decrypted_data.decode()
+        self.hw_id = decrypted_data.decode()
 
-
-        return self.decrypted_key
+        return self.hw_id
 
     def __str__(self):
-        return f"Permit Code: {self.permit_code}, Manufacturer ID: {self.m_id}, Decrypted Hardware ID: {self.decrypted_key}"
-
-# Example usage:
-#user_permit = UserPermit()
-
-#user_permit.generate_encrypted_checksum("66b5cbfdf7e4139d", "10121".encode())
-
-# Encrypt
-#hw_id = "12345"
-#machine_key = "10121"
-#machine_id = "10"  # Example machine ID (last 4 characters)
-#permit_code = user_permit.encrypt(hw_id, machine_key, machine_id)
-
-#print(f"Generated User Permit: {permit_code}")
-
-# Decrypt
-#decrypted_hw_id = user_permit.decrypt(machine_key, permit_code)
-#print(f"Decrypted HW ID: {decrypted_hw_id}")
-
-# Display the state of the object
-#print(user_permit)
-#print(user_permit.permit_code)
-
+        return f"Permit Code: {self.permit_code}, Manufacturer ID: {self.m_id}, Decrypted Hardware ID: {self.hw_id}"
